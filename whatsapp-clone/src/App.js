@@ -1,9 +1,7 @@
 import './App.css';
-import React, {useState} from 'react';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
 import { BrowserRouter as Router,Switch, Route} from 'react-router-dom';
-import {useStateValue} from './StateProvider';
 
 
 function App() {
@@ -11,9 +9,11 @@ function App() {
     <div className="App">
       <div className='app_body'>
       <Router>
+        <Sidebar />
         <Switch>
-          <Sidebar />
-          <Chat />
+          <Route path="/rooms/:roomId">
+            <Chat />
+          </Route>
         </Switch>
       </Router>
       </div>
