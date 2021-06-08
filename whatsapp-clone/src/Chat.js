@@ -5,6 +5,8 @@ import {AttachFile, InsertEmoticon, MoreVert, SearchOutlined} from '@material-ui
 import MicIcon from "@material-ui/icons/Mic";
 import {useParams} from "react-router-dom";
 import db from './firebase'
+import { useStateValue } from './StateProvider';
+import firebase from 'firebase';
 
 function Chat() {
 
@@ -13,6 +15,7 @@ function Chat() {
     const {roomId} = useParams();
     const [messages, setMessages] = useState([]);
     const [roomName, setRoomName] = useState("");
+    const [{user}, dispatch] = useStateValue();
 
     useEffect(() => {
         if (roomId) {
@@ -31,7 +34,12 @@ function Chat() {
 
     const sendMessage = (e) =>{
         e.preventDefault();
-        console.log(input);
+        db.collection('rooms').doc(roomId).collection('messages').add({
+            message: input,
+            name: user.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+
         setInput("");
     }
 
