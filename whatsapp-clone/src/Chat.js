@@ -17,6 +17,19 @@ function Chat() {
     const [roomName, setRoomName] = useState("");
     const [{user}, dispatch] = useStateValue();
 
+    useEffect(()=>{
+        if(roomId){
+            db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
+                setRoomName(snapshot.data().name);
+            });
+
+            db.collection('rooms').doc(roomId).collection("messages").orderBy("timestamp","asc").onSnapshot(snapshot => {
+                setMessages(snapshot.docs.map(doc => doc.data()))
+            });
+
+        }
+    },[roomId])
+
     useEffect(() => {
         if (roomId) {
             db.collection('rooms').doc(roomId).onSnapshot(snapshot => (
@@ -49,8 +62,14 @@ function Chat() {
             <div className = "chat_header">
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                 <div className="chat_headerInfo">
-                <h3>{roomName}</h3>
-                <p>Last Seen at ...</p>
+                <h3 className='chat-room-name'>{roomName}</h3>
+                <p className='chat-room-last-seen'>
+                        Last seen {" "}
+                        {new Date(
+                            messages[messages.length - 1]?.
+                            timestamp?.toDate()
+                        ).toUTCString()}
+                    </p>
                 </div>
 
                 <div className="chat_headerRight">
