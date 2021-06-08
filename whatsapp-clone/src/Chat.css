@@ -5,8 +5,8 @@
 }
 
 .chat_header{
-    padding:  20px;
     display: flex;
+    padding:  20px;
     align-items: center;
     border-bottom: 1px solid lightgray;
 }
