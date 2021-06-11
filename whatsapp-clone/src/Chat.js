@@ -43,7 +43,7 @@ function Chat() {
 
     useEffect(() => {
         setSeed(Math.floor(Math.random()*5000));
-    }, []);
+    }, [roomId]);
 
     const sendMessage = (e) =>{
         e.preventDefault();
@@ -91,7 +91,7 @@ function Chat() {
                     <p className={`chat_message ${ message.name == user.displayName && 'chat_receiver'}`}>
                         <span className="chat_name">{message.name}</span>
                         {message.message}
-                        <span className="chat_timestemp">{new Date(message.timestamp?.toDate()).toUTCString()}</span>
+                        <span className="chat_timestamp">{new Date(message.timestamp?.toDate()).toUTCString()}</span>
                     </p>
                 ))}
 

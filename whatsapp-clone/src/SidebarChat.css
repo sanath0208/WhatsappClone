@@ -1,9 +1,8 @@
-.sidebarChat {
+.sidebarChat{
     display: flex;
     padding: 20px;
     cursor: pointer;
-    border-bottom: 1p
-    x solid #f6f6f6;
+    border-bottom: 1px solid #f6f6f6;
 }
 
 .sidebarChat:hover{
@@ -12,9 +11,22 @@
 
 .sidebarChat_info > h2{
     font-size: 16px;
-    margin-bottom: 8px;
+    margin: 0px;
+}
+
+.sidebarChat_info > p{
+    margin: 0px;
 }
 
 .sidebarChat_info{
     margin-left: 15px;
+}
+
+.add-new-chat-title{
+    margin: 0px 0px 0px 10px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
